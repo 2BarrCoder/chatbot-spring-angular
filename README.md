@@ -1,8 +1,8 @@
 # 🤖 Chatbot Groq (Spring Boot + Angular)
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.1-green)
-![Angular](https://img.shields.io/badge/Angular-16-red)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.3-green)
+![Angular](https://img.shields.io/badge/Angular-20.0.2-red)
 ![Groq](https://img.shields.io/badge/Groq-API-blue)
 
 ## 📦 Installation
