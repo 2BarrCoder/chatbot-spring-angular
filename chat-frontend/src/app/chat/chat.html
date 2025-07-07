@@ -1,0 +1,64 @@
+<div class="container-fluid py-4 bg-light min-vh-100">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-6">
+      <div class="card border-0 shadow">
+        <!-- Header -->
+        <div class="card-header bg-primary text-white rounded-top">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-robot fs-4 me-2"></i>
+            <h5 class="mb-0">AI Chat Assistant</h5>
+          </div>
+        </div>
+
+        <!-- Chat messages -->
+        <div class="card-body p-0" style="height: 60vh; overflow-y: auto;">
+          <div class="p-3">
+            <div *ngFor="let message of messages" class="mb-3">
+              <div class="d-flex" [ngClass]="message.isUser ? 'justify-content-end' : 'justify-content-start'">
+                <div class="p-3 rounded"
+                     [ngClass]="message.isUser ? 'bg-primary text-white' : 'bg-light text-dark border'"
+                     style="max-width: 80%;">
+                  <strong class="d-block mb-1">{{ message.isUser ? 'You' : 'AI' }}</strong>
+                  <div *ngIf="!message.isUser" [innerHTML]="parseMarkdown(message.content)"></div>
+                  <span *ngIf="message.isUser">{{ message.content }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Typing indicator -->
+            <div *ngIf="isTyping" class="d-flex align-items-center text-muted px-3">
+              <div class="spinner-grow spinner-grow-sm me-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <small>AI is thinking...</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message input -->
+        <div class="card-footer bg-white rounded-bottom">
+          <form (ngSubmit)="sendMessage()">
+            <div class="input-group">
+              <textarea
+                [(ngModel)]="newMessage"
+                name="messageInput"
+                class="form-control border-primary"
+                rows="2"
+                placeholder="Type your message..."
+                (keydown)="onKeyDown($event)"
+                [disabled]="isLoading"
+                required></textarea>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="isLoading || !newMessage.trim()">
+                <i class="bi" [ngClass]="isLoading ? 'bi-hourglass' : 'bi-send-fill'"></i>
+              </button>
+            </div>
+            <small class="text-muted mt-1 d-block">Press Shift+Enter for new line, Enter to send</small>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
